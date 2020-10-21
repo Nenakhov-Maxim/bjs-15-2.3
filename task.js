@@ -1,8 +1,7 @@
 // Задание 1
 
 class PrintEditionItem {    
-    constructor (name, releaseDate, pagesCount) {
-        debugger;
+    constructor (name, releaseDate, pagesCount) {        
         this.name = name;
         this.releaseDate = releaseDate;
         this.pagesCount = pagesCount;
@@ -14,8 +13,7 @@ class PrintEditionItem {
         this.state = this.state * 1.5;
     }
 
-    set state(newState) {
-        debugger;
+    set state(newState) {        
         this._state = (newState <= 0) ? 0 : (newState >= 100) ? 100 : newState; 
     }
 
@@ -59,4 +57,37 @@ class DetectiveBook extends Book {
         super(author, name, releaseDate, pagesCount)
         this.type = "detective";        
         }
+}
+
+// Задание 2.
+
+class Library {
+    constructor (name) {
+        this.name = name;
+        this.books = [];        
+    }
+    addBook(newBook) {
+        const anyBook = newBook;        
+        if (anyBook.state > 0) {
+           this.books.push(anyBook);  
+        }     
+    }
+    findBookBy(type, value) {
+        debugger;
+        let findBook = "";
+        for (let i = 0, len = this.books.length; i < len; i++) {
+            for (const key in this.books[i]) {
+                if (this.books[i].hasOwnProperty(key) && key.indexOf(type) > -1) {
+                    if (this.books[i][key] === value) {
+                        findBook = this.books[i];
+                    } 
+                }      
+            }
+        }
+       if (findBook != "") {
+           return findBook;
+       } else {
+           return null;
+       }                                        
+    }
 }
