@@ -72,9 +72,8 @@ class Library {
            this.books.push(anyBook);  
         }     
     }
-    findBookBy(type, value) {
-        debugger;
-        let findBook = "";
+    findBookBy(type, value) {        
+        let findBook = null;
         for (let i = 0, len = this.books.length; i < len; i++) {
             for (const key in this.books[i]) {
                 if (this.books[i].hasOwnProperty(key) && key.indexOf(type) > -1) {
@@ -83,11 +82,22 @@ class Library {
                     } 
                 }      
             }
+        }       
+        return findBook;                                   
+    }
+    giveBookByName(bookName) {
+        debugger;
+        let indexBook;
+        let checkBook = null;        
+        for (let i = 0, len = this.books.length; i < len; i++) {
+            const checkNameBook = this.books[i]['name'];
+            if (checkNameBook === bookName) {
+                indexBook = i;               
+                checkBook = this.books[i];
+            }
         }
-       if (findBook != "") {
-           return findBook;
-       } else {
-           return null;
-       }                                        
+        this.books.splice(indexBook, 1);
+        return checkBook;
     }
 }
+    
