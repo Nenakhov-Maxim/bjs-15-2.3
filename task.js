@@ -85,8 +85,7 @@ class Library {
         }       
         return findBook;                                   
     }
-    giveBookByName(bookName) {
-        debugger;
+    giveBookByName(bookName) {        
         let indexBook;
         let checkBook = null;        
         for (let i = 0, len = this.books.length; i < len; i++) {
@@ -100,4 +99,66 @@ class Library {
         return checkBook;
     }
 }
-    
+
+// Задача 3
+
+class StudentLog {
+    constructor (nameStudent) {
+        this.gradeSubject = {algebra: []};
+        this.nameStuden = nameStudent;
+    }
+    getName() {
+        return this.nameStuden;
+    }  
+    addGrade(grade, subject) {        
+        if (grade > 0 && grade <= 5) {
+           for (const key in this.gradeSubject) {
+               if (this.gradeSubject.hasOwnProperty(key) && key.indexOf(subject) > -1) {                   
+                   this.gradeSubject[subject].push(grade);
+                   return this.gradeSubject[subject].length;
+               }
+           }
+           this.gradeSubject[subject] = [];
+           this.gradeSubject[subject].push(grade);
+           return this.gradeSubject[subject].length;
+           
+        } else {
+            console.log(`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`)
+            return 0;
+
+        }
+        
+    } 
+    getAverageBySubject(subject) {        
+        for (const key in this.gradeSubject) {
+            if (this.gradeSubject.hasOwnProperty(key) && key.indexOf(subject) > -1) {
+                const gradesOneSubject = this.gradeSubject[key];
+                let grade = 0;
+                for (let i = 0, len = gradesOneSubject.length; i < len; i++) {
+                     grade += gradesOneSubject[i];                    
+                }
+                let averageGrades = grade / gradesOneSubject.length;
+                return averageGrades;
+            }
+        }
+        return 0;
+    }
+    getTotalAverage() {        
+        let totalAverageSumm = 0;
+        let totalAverage = 0;        
+        for (const key in this.gradeSubject) {
+            let grade = 0;
+            let gradesOneSubject = [];
+            if (this.gradeSubject.hasOwnProperty(key)) {
+                gradesOneSubject = this.gradeSubject[key];                
+                for (let i = 0, len = gradesOneSubject.length; i < len; i++) {
+                     grade += gradesOneSubject[i];  
+                }                  
+            }
+            let averageGrades = grade / gradesOneSubject.length; 
+            totalAverageSumm += averageGrades                  
+        }
+        totalAverage = totalAverageSumm / Object.keys(this.gradeSubject).length;
+        return totalAverage;
+    } 
+}
